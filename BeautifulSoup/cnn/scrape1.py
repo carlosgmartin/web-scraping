@@ -1,7 +1,7 @@
 import csv
 
 import requests
-from bs4  import BeautifulSoup
+from bs4 import BeautifulSoup
 
 url = 'http://money.cnn.com/data/hotstocks/index.html'
 response = requests.get(url)
@@ -16,7 +16,8 @@ table = most_actives.find('table', attrs={'class':'wsod_dataTable wsod_dataTable
 row_list = []
 cell_list = []
 for cell in table.find('tr').findAll('th'):
-	text = cell.text.encode('utf-8').strip()
+	text = cell.text.encode('raw-unicode-escape')
+	print text
 	cell_list.append(text)
 row_list.append(cell_list)
 
