@@ -14,6 +14,7 @@ table = most_actives.find('table',
                           attrs={'class':
                                  'wsod_dataTable wsod_dataTableBigAlt'})
 
+base_url = 'http://money.cnn.com/'
 row_list = []
 for row in table.findAll('tr'):
     cell_list = []
@@ -23,6 +24,18 @@ for row in table.findAll('tr'):
     for cell in row.findAll('td'):
         text = cell.text.encode('raw-unicode-escape')
         cell_list.append(text)
+    if row.find('a') is not None:
+        company_url = base_url + row.find('a').get('href')
+        company_response = requests.get(company_url)
+        company_html = company_response.content
+        company_soup = BeautifulSoup(company_html)
+        competitors = company_soup.find('table',
+                                        attrs={'class':
+                                               'wsod_dataTable ' +
+                                               'wsod_dataTableBig ' +
+                                               'wsod_quoteCompetitorsModule'})
+        for competitor in competitors.findAll('a'):
+            cell_list.append(competitor.nextSibling.text)
     row_list.append(cell_list)
 
 outfile = open("./hotstocks.csv", "wb")
