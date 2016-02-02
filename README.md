@@ -1,5 +1,4 @@
 # Web scraping in Python
-----------
 ## Using Scrapy ##
  1. Install Scrapy by entering `pip install scrapy` in your Terminal.
  2. Navigate to the directory where you would like to create your Scrapy project.
