@@ -76,4 +76,4 @@
 
  9. Navigate to the top directory of your project by entering `cd ../..`.
 
- 10. Run the spider you created and store its output in a `comments.json` file by entering `scrapy crawl myspider -o comments.json`.
+ 10. Run the spider you created and store its output in a `comments.json` file by entering `scrapy crawl myspider -o comments.json`. View the stored comments by entering `open comments.json`.
