@@ -37,9 +37,9 @@
 
         def parse(self, response):
             for section in response.xpath('//div[@class="blog-section"]'):
-                link = section.xpath('.//a/@href').extract()[0]
+                link = section.xpath('.//a/@href').extract_first()
                 yield scrapy.Request(link, callback=self.parse_entry)
-            next = response.xpath('//div[@class="comnt-btn"]//@href').extract()[0]
+            next = response.xpath('//div[@class="comnt-btn"]//@href').extract_first()
             yield scrapy.Request(next, callback=self.parse)
 
         def parse_entry(self, response):
